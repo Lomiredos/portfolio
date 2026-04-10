@@ -4,7 +4,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
+
+:root {
+    
+    /*Colors*/
+    --bgColor : rgb(158, 192, 240);
+    --darkBlue : rgb(13, 23, 130);
+    --purple : rgb(66, 15, 161);
+    --firstLayerColor : rgb(157, 164, 245);
+    --secondLayerColor : rgb(109, 120, 242);
+    
+    /*Preset Bordure*/
+    --bordure :3px solid var(--darkBlue);
+
+    /*Angles Bordure*/
+
+}
+
+
+body {
+    background-color: var(--bgColor);
+}
+
+
+.MyCourse{
+
+    background-color: var(--firstLayerColor);
+    border : var(--bordure);
+    border-radius: 50px;
+}
+
 
 /* Navigation Barre*/
 nav {
@@ -21,31 +52,31 @@ nav {
     box-sizing: border-box;
 
     /* Style */
-    background-color: rgb(157, 164, 245);
-    border : 3px solid rgb(13, 23, 130);
+    background-color: var(--firstLayerColor);
+    border : var(--bordure);
     border-radius: 50px;
 }
 
 .nav-link {
     text-decoration: none;
-    color: rgb(13, 23, 130);
-    background-color: rgb(109, 120, 242);
-    border: solid rgb(109, 120, 242);
+    color: var(--darkBlue);
+    background-color: var(--secondLayerColor);
+    border: solid var(--secondLayerColor);
     border-width: 10px;
     border-radius: 50px;
 
 }
 
+
 /*MyCardPerso*/
-
-
 .MyCard {
-    margin-top: 100px;
-    margin-left: 10px;
-    width: 500px;
+    margin-right: 10px;
+    width: 35%;
     background-color: rgb(157, 164, 245);
-    border : 3px solid rgb(13, 23, 130);
+    border : var(--bordure);
     border-radius: 50px;
+    min-width : 500px;
+    max-width : 900px;
 }
 
 .MyCard img {
@@ -54,7 +85,7 @@ nav {
     width: 40%;
     height: auto;
     border-radius: 35px;
-    border : solid rgb(13, 23, 130) 3px;
+    border : var(--bordure);
     margin-bottom : 10px;
 }
 
@@ -87,25 +118,29 @@ nav {
     margin-left : -35px;
     font-size : 28px;
     text-decoration: underline;
-    color: rgb(66, 15, 161);
+    color: var(--purple);
 }
 
 .MyCard-Contact {
     margin-left : 25px;
     margin-right : 25px;
     margin-bottom : 10px;
-    border : solid rgb(13, 23, 130) 3px;
-    background-color: rgb(109, 120, 242);
-    
+    border : var(--bordure);
+    background-color: var(--secondLayerColor);
+    min-height : 180px;
     border-radius: 35px;
     
+    display: flex; 
+    flex-direction: column;
+    
+    justify-content: space-between;
 }
 
 .MyCard-Bis {
     display: flex; 
     align-items: center;
-    margin-top : 5px;
-    margin-bottom : 5px;
+    margin-top : 20px;
+    margin-bottom : 20px;
 
 }
 
@@ -115,9 +150,110 @@ nav {
     border: none;
 }
 .MyCard-Bis a {
-    margin-top : 10px;
     margin-left : 10px;
     font-size : 20px;
     text-decoration: None;
 }
 
+
+
+.Top {
+    display: flex;   
+    flex-wrap: wrap;
+    
+    align-items: top;
+    margin-top: 100px;
+    padding-left : 10px;
+    padding-right : 10px;
+}
+
+.Top>* {
+    flex: 0 1 500px;
+}
+
+
+
+.Down {
+    border : var(--bordure);
+    background-color: var(--firstLayerColor);
+    border-radius : 50px;
+    max-width : 1060px;
+    margin-top : 20px;
+    margin-left : 0;
+    margin-right :0;
+    padding : 10px;
+
+}
+
+.All {
+    margin : auto;
+    max-width: 1060px;
+    align-items : left;
+}
+.MyCourse {
+    width: fit-content;
+    height: fit-content;
+}
+
+
+@media (min-width: 1060px) {
+    .MyCourse {
+        margin-left : 30px;
+    }
+
+    .Top {
+        
+    display: flex;
+    justify-content: space-between;
+    }
+}
+
+@media (max-width: 1060px) {
+    .MyCourse {
+        margin-top : 15px;
+    margin-left: 10px;
+    }
+}
+
+
+
+.Down h2 {
+    text-decoration: underline;
+    margin-left : 40px;
+    font-size : 40px;
+    margin-bottom: 10px;
+}
+.Down h3 {
+      font-size: 25px;
+  margin-left: 60px;
+}
+.Down p {
+        font-size : 18px;
+    margin-left: 90px;
+    margin-bottom : 20px;
+    margin-top : 5px;
+    margin-right : 10px;
+}
+
+
+
+ dl {
+    text-decoration: underline;
+    margin-left : 40px;
+    font-size : 40px;
+    margin-bottom: 10px;
+}
+
+
+ dt {
+  font-size: 25px;
+  margin-left: 60px;
+}
+
+ dd {
+    font-size : 18px;
+    margin-left: 90px;
+    margin-bottom : 20px;
+    margin-top : 5px;
+    margin-right : 10px;
+}
