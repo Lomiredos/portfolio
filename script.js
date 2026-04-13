@@ -1,4 +1,4 @@
-// ── Nav active link on scroll ──────────────────────
+// surligne le bon lien dans la nav quand on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -16,7 +16,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// ── Formulaire de contact (Formspree AJAX) ─────────
+// formulaire de contact — envoie via formspree sans rechargé la page
 const contactForm = document.getElementById('contact-form');
 const formStatus  = document.getElementById('form-status');
 
@@ -42,10 +42,12 @@ if (contactForm) {
         formStatus.classList.add('success');
         contactForm.reset();
       } else {
+        // formspree a répondu mais ca s'est mal passé
         formStatus.textContent = 'Une erreur est survenue, réessaie.';
         formStatus.classList.add('error');
       }
     } catch {
+      // pas de réseau ou formspree injoignable
       formStatus.textContent = 'Impossible d\'envoyer, vérifie ta connexion.';
       formStatus.classList.add('error');
     }
@@ -55,16 +57,19 @@ if (contactForm) {
   });
 }
 
-// ── Projets — chargement + filtres ────────────────
+// ── section projets ────────────────────────────────
+
 let activeCategory = 'all';
 let activeLang     = null;
 
+// construit une carte projet a partir d'un objet json
 function buildProjectCard(project) {
   const card = document.createElement('div');
   card.className = 'project-card';
   card.dataset.category = project.category;
   card.dataset.langs    = project.langs.join(' ');
 
+  // si y'a une image on l'utilise, sinon le gradient de secour
   const imgEl = project.image
     ? `<img class="project-img" src="${project.image}" alt="${project.name}" />`
     : `<div class="project-img" style="background:${project.gradient};"></div>`;
@@ -81,6 +86,7 @@ function buildProjectCard(project) {
   return card;
 }
 
+// charge le json et génere les cartes au demarage
 async function loadProjects() {
   const grid = document.getElementById('project-grid');
   if (!grid) return;
@@ -89,16 +95,18 @@ async function loadProjects() {
     const res      = await fetch('projects.json');
     const projects = await res.json();
 
+    // trie par qualité (1 = le meilleur, en haut)
     projects
       .sort((a, b) => a.quality - b.quality)
       .forEach(p => grid.appendChild(buildProjectCard(p)));
 
     filterProjects();
   } catch (e) {
-    console.error('Impossible de charger projects.json', e);
+    console.error('projects.json introuvable ou malformé', e);
   }
 }
 
+// cache les cartes qui matchent pas les filtres actifs
 function filterProjects() {
   document.querySelectorAll('.project-card').forEach(card => {
     const langs     = (card.dataset.langs || '').split(' ');
@@ -108,7 +116,7 @@ function filterProjects() {
   });
 }
 
-// Filtre par catégorie
+// boutons de catégorie (game, engine, etc.)
 document.querySelectorAll('.category-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
@@ -120,12 +128,12 @@ document.querySelectorAll('.category-btn').forEach(btn => {
 
 loadProjects();
 
-// Filtre par langage (Compétences + Projets synchronisés)
+// filtre par langage — marche depuis compétences et depuis projets
+// les deux barres sont synchro, cliquer sur une met a jour l'autre
 const langCards = document.querySelectorAll('.lang-card');
 
 function setActiveLang(lang) {
   activeLang = lang;
-  // Sync tous les boutons lang des deux sections
   langCards.forEach(c => {
     c.classList.toggle('active', c.dataset.lang === lang);
   });
@@ -136,9 +144,10 @@ langCards.forEach(card => {
   card.addEventListener('click', () => {
     const isAlreadyActive = card.classList.contains('active');
     if (isAlreadyActive) {
-      setActiveLang(null);
+      setActiveLang(null); // desactive si on reclique
     } else {
       setActiveLang(card.dataset.lang);
+      // si on clique depuis compétences, scroll vers les projets
       document.getElementById('Projets').scrollIntoView({ behavior: 'smooth' });
     }
   });
