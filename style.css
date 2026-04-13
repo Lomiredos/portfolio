@@ -537,11 +537,17 @@ nav {
   border: var(--border);
   border-radius: 15px;
   background-color: var(--layer-2);
-  color: inherit;
+  color: var(--dark-blue);
   font-family: inherit;
   resize: vertical;
   outline: none;
   transition: filter 0.2s;
+}
+
+/* placeholder aussi plus lisible */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(13, 23, 130, 0.5);
 }
 
 .form-group input:focus,
@@ -590,25 +596,107 @@ nav {
   }
 }
 
-@media (max-width: 500px) {
+/* tablette étroite — les liens de nav rétrécissent */
+@media (max-width: 600px) {
+  nav {
+    padding: 8px 12px;
+    gap: 4px;
+  }
+
+  .nav-link {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+/* téléphone — refonte complète du layout */
+@media (max-width: 480px) {
   .page-content {
-    overflow-x: auto;
+    padding: 80px 8px 20px;
   }
 
-  /* sur mobile la carte et le parcours passent en colonne centrée */
-  .top {
-    flex-wrap: nowrap;
-    flex-direction: column;
-    align-items: center;
+  /* nav compacte sur une ligne */
+  nav {
+    padding: 6px 8px;
+    top: 6px;
+    left: 6px;
+    width: calc(100% - 12px);
   }
 
+  .nav-link {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  /* carte en colonne — photo en haut, infos en dessous */
   .my-card {
-    flex: 0 0 auto;
-    width: 460px;
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 100%;
   }
 
+  .my-card-body {
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  .my-card-photo {
+    flex: none;
+    width: 100%;
+    height: 220px;
+    min-height: unset;
+    border-radius: 15px;
+  }
+
+  .my-card-right {
+    padding: 0;
+  }
+
+  /* parcours pleine largeur sous la carte */
   .my-course {
-    flex: 0 0 auto;
-    width: 460px;
+    width: 100%;
+    flex: 1 1 100%;
+    padding: 14px 20px;
+    border-radius: 25px;
+  }
+
+  /* expériences — marges réduites pour que ca respire */
+  .experience {
+    padding: 16px 16px 20px;
+    border-radius: 25px;
+  }
+
+  .experience > h2 {
+    font-size: 24px;
+    margin-left: 0;
+  }
+
+  .experience h3 {
+    font-size: 16px;
+    margin-left: 8px;
+  }
+
+  .experience p {
+    font-size: 14px;
+    margin-left: 12px;
+    margin-right: 0;
+    line-height: 1.5;
+  }
+
+  /* titre de section plus petit */
+  .section-title {
+    font-size: 40px;
+  }
+
+  /* compétences sur une colonne */
+  .skill-groups {
+    grid-template-columns: 1fr;
+  }
+
+  /* contact — formulaire pleine largeur */
+  .contact-layout .my-card,
+  .contact-form {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
