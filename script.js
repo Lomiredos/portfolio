@@ -49,8 +49,12 @@ function majAccordeons() {
     details.open = grand;
     const p = details.querySelector('p');
     if (!p) return;
-    p.style.maxHeight = grand ? 'none' : '0px';
-    p.style.opacity   = grand ? '1'    : '0';
+    // on coupe la transition le temps de setter l'etat initial, sinon ca anime au chargement
+    p.style.transition = 'none';
+    p.style.maxHeight  = grand ? 'none' : '0px';
+    p.style.opacity    = grand ? '1'    : '0';
+    // on remet la transition apres que le navigateur ait appliqué le style
+    requestAnimationFrame(() => { p.style.transition = ''; });
   });
 }
 
