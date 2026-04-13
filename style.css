@@ -1,259 +1,611 @@
-
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    
-    /*Colors*/
-    --bgColor : rgb(158, 192, 240);
-    --darkBlue : rgb(13, 23, 130);
-    --purple : rgb(66, 15, 161);
-    --firstLayerColor : rgb(157, 164, 245);
-    --secondLayerColor : rgb(109, 120, 242);
-    
-    /*Preset Bordure*/
-    --bordure :3px solid var(--darkBlue);
-
-    /*Angles Bordure*/
-
+  --bg-color:  rgb(158, 192, 240);
+  --dark-blue: rgb(13, 23, 130);
+  --purple:    rgb(66, 15, 161);
+  --layer-1:   rgb(157, 164, 245);
+  --layer-2:   rgb(109, 120, 242);
+  --border:    3px solid var(--dark-blue);
+  --radius:    50px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-    background-color: var(--bgColor);
+  background-color: var(--bg-color);
 }
 
+/* ─── Navigation ─────────────────────────────────── */
 
-.MyCourse{
-
-    background-color: var(--firstLayerColor);
-    border : var(--bordure);
-    border-radius: 50px;
-}
-
-
-/* Navigation Barre*/
 nav {
-    /* Layout */
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-
-    /* Dimensions*/
-    width: 97.5%;
-    padding: 10px 20px;
-    box-sizing: border-box;
-
-    /* Style */
-    background-color: var(--firstLayerColor);
-    border : var(--bordure);
-    border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  padding: 10px 20px;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: var(--radius);
+  z-index: 100;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: var(--darkBlue);
-    background-color: var(--secondLayerColor);
-    border: solid var(--secondLayerColor);
-    border-width: 10px;
-    border-radius: 50px;
-
+  text-decoration: none;
+  color: var(--dark-blue);
+  background-color: var(--layer-2);
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-
-/*MyCardPerso*/
-.MyCard {
-    margin-right: 10px;
-    width: 35%;
-    background-color: rgb(157, 164, 245);
-    border : var(--bordure);
-    border-radius: 50px;
-    min-width : 500px;
-    max-width : 900px;
+.nav-link:hover {
+  filter: brightness(1.1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(13, 23, 130, 0.2);
+  outline: 2px solid var(--dark-blue);
 }
 
-.MyCard img {
-    margin-left: 10px;
-    margin-top: 10px;
-    width: 40%;
-    height: auto;
-    border-radius: 35px;
-    border : var(--bordure);
-    margin-bottom : 10px;
+.nav-link.active {
+  filter: brightness(1.15);
+  box-shadow: 0 2px 8px rgba(13, 23, 130, 0.15);
 }
 
-.MyCard-Titre {
-    margin-top : 10px;
-    margin-left: 40px;
-    margin-right : 30px;
-    display: flex;
-    justify-content: space-between;
+/* ─── Page layout ────────────────────────────────── */
+
+.page-content {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 100px 10px 30px;
 }
 
-.MyCard-Body{
-    display: flex;
-    justify-content: space-between;
+/* ─── Top row (card + course) ────────────────────── */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
-.MyCard-SchoolInfos {
-    margin-left : -5px;
-    display: flex;
+.top > * {
+  flex: 1 1 500px;
 }
 
-.MyCard-SchoolInfos img {
-    width: 40%;
-    height: auto;
-    border : none;
-}
+/* ─── My Card ────────────────────────────────────── */
 
-.MyCard-SchoolInfos a {
-    margin-top : 53px;
-    margin-left : -35px;
-    font-size : 28px;
-    text-decoration: underline;
-    color: var(--purple);
-}
+@media (max-width: 500px) {
+      .my-card-school img {
+        width: 70px;
+      }
 
-.MyCard-Contact {
-    margin-left : 25px;
-    margin-right : 25px;
-    margin-bottom : 10px;
-    border : var(--bordure);
-    background-color: var(--secondLayerColor);
-    min-height : 180px;
-    border-radius: 35px;
-    
-    display: flex; 
-    flex-direction: column;
-    
-    justify-content: space-between;
-}
+      .my-card-school a {
+        font-size: 18px;
+      }
 
-.MyCard-Bis {
-    display: flex; 
-    align-items: center;
-    margin-top : 20px;
-    margin-bottom : 20px;
+      .contact-link img {
+        width: 24px;
+      }
 
-}
+      .contact-link a {
+        font-size: 15px;
+      }
 
-.MyCard-Bis img {
-    width: 15%;
-    height: auto;
-    border: none;
-}
-.MyCard-Bis a {
-    margin-left : 10px;
-    font-size : 20px;
-    text-decoration: None;
-}
+      .my-card-contact {
+        padding: 10px 14px;
+        gap: 6px;
+      }
 
-
-
-.Top {
-    display: flex;   
-    flex-wrap: wrap;
-    
-    align-items: top;
-    margin-top: 100px;
-    padding-left : 10px;
-    padding-right : 10px;
-}
-
-.Top>* {
-    flex: 0 1 500px;
-}
-
-
-
-.Down {
-    border : var(--bordure);
-    background-color: var(--firstLayerColor);
-    border-radius : 50px;
-    max-width : 1060px;
-    margin-top : 20px;
-    margin-left : 0;
-    margin-right :0;
-    padding : 10px;
-
-}
-
-.All {
-    margin : auto;
-    max-width: 1060px;
-    align-items : left;
-}
-.MyCourse {
-    width: fit-content;
-    height: fit-content;
-}
-
-
-@media (min-width: 1060px) {
-    .MyCourse {
-        margin-left : 30px;
+      .my-card-title h2 {
+        font-size: 14px;
+      }
     }
 
-    .Top {
-        
-    display: flex;
-    justify-content: space-between;
-    }
+.my-card {
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: var(--radius);
+  max-width: 900px;
 }
+
+.my-card-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px 8px;
+}
+
+.my-card-body {
+  display: flex;
+  align-items: stretch;
+  padding: 10px;
+  gap: 15px;
+}
+
+/* Photo colonne gauche */
+.my-card-photo {
+  flex: 0 0 38%;
+  border-radius: 20px;
+  overflow: hidden;
+  min-height: 250px;
+  border: var(--border);
+}
+
+.my-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Colonne droite */
+.my-card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Logo + lien Gaming Campus */
+.my-card-school {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.my-card-school img {
+  width: 110px;
+  height: auto;
+}
+
+.my-card-school a {
+  font-size: 26px;
+  text-decoration: underline;
+  color: var(--purple);
+}
+
+/* Boîte contact GitHub / LinkedIn */
+.my-card-contact {
+  container-type: size;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--layer-2);
+  border: var(--border);
+  border-radius: 25px;
+  padding: 14px 20px;
+}
+
+.contact-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-link img {
+  height: clamp(20px, 20cqh, 44px);
+  width: auto;
+}
+
+.contact-link a {
+  font-size: clamp(14px, 10cqh, 26px);
+}
+
+.contact-link a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── My Course ──────────────────────────────────── */
+
+.my-course {
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 15px 40px 20px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.my-course h2 {
+  font-size: 36px;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+
+.my-course dt {
+  font-size: 22px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.my-course dd {
+  font-size: 16px;
+  margin-left: 40px;
+  margin-top: 4px;
+}
+
+/* ─── Experience section ─────────────────────────── */
+
+.experience {
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 20px 40px 30px;
+}
+
+.experience > h2 {
+  font-size: 36px;
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+
+.experience article {
+  margin-bottom: 15px;
+}
+
+.experience h3 {
+  font-size: 22px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.experience p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-left: 40px;
+  margin-right: 10px;
+}
+
+/* ─── Section title ──────────────────────────────── */
+
+.section-title {
+  font-size: 64px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* ─── Compétences — filtre langages ─────────────── */
+
+.lang-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 25px;
+}
+
+.lang-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+  user-select: none;
+  min-width: 100px;
+}
+
+.lang-card:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.lang-card.active {
+  background-color: var(--layer-2);
+  outline: 3px solid var(--dark-blue);
+}
+
+.lang-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.lang-card span {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--dark-blue);
+}
+
+/* ─── Compétences — groupes ──────────────────────── */
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.skill-group {
+  container-type: inline-size;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: 20px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-group h3 {
+  font-size: clamp(14px, 5cqw, 22px);
+  margin-bottom: 10px;
+  color: var(--dark-blue);
+}
+
+.skill-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+  align-content: flex-start;
+}
+
+.skill-columns ul {
+  list-style: none;
+  display: contents;
+}
+
+.skill-columns li {
+  font-size: clamp(14px, 5cqw, 22px);
+  padding: clamp(4px, 1.5cqw, 10px) clamp(10px, 3.5cqw, 20px);
+  background-color: var(--layer-2);
+  border: var(--border);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+  .skill-groups {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Projets ────────────────────────────────────── */
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.category-btn {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 20px;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: 30px;
+  cursor: pointer;
+  color: var(--dark-blue);
+  transition: filter 0.2s, transform 0.15s;
+}
+
+.category-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background-color: var(--layer-2);
+  outline: 3px solid var(--dark-blue);
+}
+
+.filter-separator {
+  width: 2px;
+  align-self: stretch;
+  background-color: var(--dark-blue);
+  border-radius: 2px;
+  opacity: 0.3;
+  margin: 0 4px;
+}
+
+/* Lang cards dans la barre de filtre projets */
+.category-filter .lang-card {
+  flex-direction: row;
+  padding: 6px 14px;
+  gap: 8px;
+  min-width: unset;
+}
+
+.category-filter .lang-logo {
+  width: 24px;
+  height: 24px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(13, 23, 130, 0.25);
+}
+
+.project-card.hidden {
+  display: none;
+}
+
+.project-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-info h3 {
+  font-size: 17px;
+  color: var(--dark-blue);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-tags span {
+  font-size: 13px;
+  padding: 3px 10px;
+  background-color: var(--layer-2);
+  border: var(--border);
+  border-radius: 20px;
+  color: var(--dark-blue);
+}
+
+/* ─── Contact ────────────────────────────────────── */
+
+.contact-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.contact-layout .my-card {
+  flex: 1 1 380px;
+  max-width: 500px;
+}
+
+.contact-form {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: var(--layer-1);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 24px 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-blue);
+}
+
+.form-group input,
+.form-group textarea {
+  font-size: 15px;
+  padding: 10px 14px;
+  border: var(--border);
+  border-radius: 15px;
+  background-color: var(--layer-2);
+  color: inherit;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: filter 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  filter: brightness(1.08);
+}
+
+.contact-form button {
+  align-self: flex-end;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 28px;
+  background-color: var(--layer-2);
+  border: var(--border);
+  border-radius: 30px;
+  cursor: pointer;
+  color: var(--dark-blue);
+  transition: filter 0.2s, transform 0.15s;
+}
+
+.contact-form button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.contact-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-status {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.form-status.success { color: rgb(20, 120, 40); }
+.form-status.error   { color: rgb(180, 30, 30); }
+
+/* ─── Responsive ─────────────────────────────────── */
 
 @media (max-width: 1060px) {
-    .MyCourse {
-        margin-top : 15px;
-    margin-left: 10px;
-    }
+  .my-course {
+    margin-top: 0;
+  }
 }
 
+@media (max-width: 500px) {
+  .page-content {
+    overflow-x: auto;
+  }
 
+  .top {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.Down h2 {
-    text-decoration: underline;
-    margin-left : 40px;
-    font-size : 40px;
-    margin-bottom: 10px;
-}
-.Down h3 {
-      font-size: 25px;
-  margin-left: 60px;
-}
-.Down p {
-        font-size : 18px;
-    margin-left: 90px;
-    margin-bottom : 20px;
-    margin-top : 5px;
-    margin-right : 10px;
-}
+  .my-card {
+    flex: 0 0 auto;
+    width: 460px;
+  }
 
-
-
- dl {
-    text-decoration: underline;
-    margin-left : 40px;
-    font-size : 40px;
-    margin-bottom: 10px;
-}
-
-
- dt {
-  font-size: 25px;
-  margin-left: 60px;
-}
-
- dd {
-    font-size : 18px;
-    margin-left: 90px;
-    margin-bottom : 20px;
-    margin-top : 5px;
-    margin-right : 10px;
+  .my-course {
+    flex: 0 0 auto;
+    width: 460px;
+  }
 }

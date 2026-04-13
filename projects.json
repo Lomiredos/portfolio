@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Shoot them up",
+    "category": "game",
+    "langs": ["c"],
+    "tags": ["C++", "Game"],
+    "image": "",
+    "gradient": "linear-gradient(135deg, #6c63ff, #3a3a8c)",
+    "quality": 1
+  },
+  {
+    "name": "Nom du projet",
+    "category": "engine",
+    "langs": ["c"],
+    "tags": ["C++", "Engine"],
+    "image": "",
+    "gradient": "linear-gradient(135deg, #f0a500, #c75000)",
+    "quality": 2
+  },
+  {
+    "name": "Nom du projet",
+    "category": "tools",
+    "langs": ["python"],
+    "tags": ["Python", "Outil"],
+    "image": "",
+    "gradient": "linear-gradient(135deg, #3776ab, #ffde57)",
+    "quality": 3
+  },
+  {
+    "name": "Nom du projet",
+    "category": "web",
+    "langs": ["web"],
+    "tags": ["HTML", "CSS"],
+    "image": "",
+    "gradient": "linear-gradient(135deg, #e34c26, #264de4)",
+    "quality": 4
+  }
+]
