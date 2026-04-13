@@ -252,21 +252,45 @@ nav {
   margin-bottom: 15px;
 }
 
-.experience article {
-  margin-bottom: 15px;
+.exp-item {
+  margin-bottom: 8px;
+  border: var(--border);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.experience h3 {
-  font-size: 22px;
-  margin-left: 20px;
-  margin-bottom: 5px;
+.exp-item summary {
+  list-style: none; /* vire le triangle natif du navigateur */
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
 }
 
-.experience p {
+.exp-item summary::-webkit-details-marker {
+  display: none; /* vire le triangle sur safari aussi */
+}
+
+/* fleche custom */
+.exp-item summary::before {
+  content: '▶';
+  font-size: 14px;
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+
+.exp-item[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.exp-item p {
   font-size: 16px;
   line-height: 1.6;
-  margin-left: 40px;
-  margin-right: 10px;
+  padding: 0 20px 16px 44px;
 }
 
 /* grand titre de section réutilisable partout */
@@ -638,18 +662,35 @@ nav {
   .my-card-body {
     flex-direction: column;
     padding: 8px;
+    gap: 10px;
   }
 
   .my-card-photo {
     flex: none;
     width: 100%;
-    height: 220px;
+    height: 240px;
     min-height: unset;
     border-radius: 15px;
   }
 
+  /* on montre le visage, pas le sommet du crâne */
+  .my-card-photo img {
+    object-position: center 15%;
+  }
+
   .my-card-right {
     padding: 0;
+    min-height: 180px;
+  }
+
+  /* taille fixe pour les icones/texte contact sur mobile
+     les container queries cqh marchent pas bien en colonne */
+  .contact-link img {
+    height: 28px;
+  }
+
+  .contact-link a {
+    font-size: 16px;
   }
 
   /* parcours pleine largeur sous la carte */
