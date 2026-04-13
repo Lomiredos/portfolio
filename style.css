@@ -5,6 +5,8 @@
 }
 
 :root {
+color-scheme: light;
+
   --bg-color:  rgb(158, 192, 240);
   --dark-blue: rgb(13, 23, 130);
   --purple:    rgb(66, 15, 161);
