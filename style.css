@@ -681,7 +681,10 @@ nav {
   .my-card-box1,
   .my-card-box2 {
     background-color: var(--layer-1);
-    border: var(--border);
+    border-top:    var(--border);
+    border-right:  var(--border);
+    border-bottom: var(--border);
+    border-left:   var(--border);
     border-radius: 25px;
     overflow: hidden;
     flex: none;
@@ -696,15 +699,18 @@ nav {
   .my-card-photo {
     width: 80%;
     height: auto;
-    aspect-ratio: 16 / 9;
     min-height: unset;
     flex: none;
-    margin: 0 auto 10px;
+    align-self: center;
+    margin-bottom: 10px;
     border-radius: 15px;
   }
 
-  /* garde les proportions de la photo dans le cadre 16:9 */
+  /* laisse l'image définir sa hauteur naturellement */
   .my-card-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: unset;
     object-position: center 35%;
   }
 
