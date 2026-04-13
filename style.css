@@ -694,19 +694,22 @@ nav {
   }
 
   .my-card-photo {
-    height: 230px;
+    width: 80%;
+    height: auto;
+    aspect-ratio: 16 / 9;
     min-height: unset;
     flex: none;
+    margin: 0 auto 10px;
+    border-radius: 15px;
   }
 
-  /* descend un peu le crop pour montrer le visage, pas le front */
+  /* garde les proportions de la photo dans le cadre 16:9 */
   .my-card-photo img {
     object-position: center 35%;
   }
 
   /* box 2 : rôle + école + contacts */
   .my-card-box2 {
-    border-left: none;
     padding: 12px;
     gap: 10px;
   }
