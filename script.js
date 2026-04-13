@@ -1,3 +1,63 @@
+// anime l'ouverture/fermeture des <details> — le navigateur le fait pas nativement
+function setupAccordeons() {
+  document.querySelectorAll('.exp-item').forEach(details => {
+    const summary = details.querySelector('summary');
+    const p       = details.querySelector('p');
+
+    summary.addEventListener('click', e => {
+      e.preventDefault(); // on gere nous meme
+
+      if (!details.open) {
+        // ouverture — on set open d'abord pour que le p soit dans le dom
+        details.open = true;
+        p.style.maxHeight = '0px';
+        p.style.opacity   = '0';
+
+        // double rAF pour que le navigateur prenne en compte le style de depart avant la transition
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          p.style.maxHeight = p.scrollHeight + 'px';
+          p.style.opacity   = '1';
+        }));
+
+        // une fois arrivé, on enleve le max-height fixe pour que le contenu puisse respirer
+        p.addEventListener('transitionend', () => {
+          p.style.maxHeight = 'none';
+        }, { once: true });
+
+      } else {
+        // fermeture — on remet une valeur fixe avant d'animer vers 0
+        p.style.maxHeight = p.scrollHeight + 'px';
+        p.style.opacity   = '1';
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          p.style.maxHeight = '0px';
+          p.style.opacity   = '0';
+        }));
+
+        p.addEventListener('transitionend', () => {
+          details.open = false;
+        }, { once: true });
+      }
+    });
+  });
+}
+
+// ouvre ou ferme selon la taille de l'ecran, sans animation (c'est l'etat initial)
+function majAccordeons() {
+  const grand = window.innerWidth > 480;
+  document.querySelectorAll('.exp-item').forEach(details => {
+    details.open = grand;
+    const p = details.querySelector('p');
+    if (!p) return;
+    p.style.maxHeight = grand ? 'none' : '0px';
+    p.style.opacity   = grand ? '1'    : '0';
+  });
+}
+
+setupAccordeons();
+majAccordeons();
+window.addEventListener('resize', majAccordeons);
+
 // surligne le bon lien dans la nav quand on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');

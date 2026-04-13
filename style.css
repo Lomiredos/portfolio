@@ -108,50 +108,57 @@ nav {
   }
 }
 
-/* carte de présentation principale */
+/* carte de présentation — deux colonnes sur pc */
 .my-card {
   background-color: var(--layer-1);
   border: var(--border);
   border-radius: var(--radius);
   max-width: 900px;
-}
-
-.my-card-title {
   display: flex;
-  justify-content: space-between;
-  padding: 12px 20px 8px;
-}
-
-.my-card-body {
-  display: flex;
-  align-items: stretch;
-  padding: 10px;
-  gap: 15px;
-}
-
-/* photo a gauche dans son propre conteneur arrondi */
-.my-card-photo {
-  flex: 0 0 38%;
-  border-radius: 20px;
   overflow: hidden;
+}
+
+/* colonne gauche — nom + photo */
+.my-card-box1 {
+  flex: 0 0 38%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-name {
+  padding: 12px 20px 8px;
+  font-size: 20px;
+}
+
+/* photo qui prend tout l'espace restant dans la box */
+.my-card-photo {
+  flex: 1;
   min-height: 250px;
-  border: var(--border);
+  border-top: var(--border);
+  overflow: hidden;
 }
 
 .my-card-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center 15%;
   display: block;
 }
 
-/* colone de droite — logo école en haut, contact en bas */
-.my-card-right {
+/* colonne droite — rôle + école + contacts */
+.my-card-box2 {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 10px;
   gap: 15px;
+  border-left: var(--border);
+}
+
+.card-role {
+  font-size: 20px;
+  padding: 2px 10px 0;
 }
 
 .my-card-school {
@@ -262,8 +269,8 @@ nav {
 .exp-item summary {
   list-style: none; /* vire le triangle natif du navigateur */
   cursor: pointer;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: bold;
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -291,6 +298,10 @@ nav {
   font-size: 16px;
   line-height: 1.6;
   padding: 0 20px 16px 44px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
 }
 
 /* grand titre de section réutilisable partout */
@@ -652,39 +663,58 @@ nav {
     font-size: 12px;
   }
 
-  /* carte en colonne — photo en haut, infos en dessous */
+  /* version mobile — deux boites distinctes */
   .my-card {
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    gap: 10px;
     width: 100%;
     max-width: 100%;
     flex: 1 1 100%;
   }
 
-  .my-card-body {
-    flex-direction: column;
-    padding: 8px;
-    gap: 10px;
+  /* chaque box a son propre style de carte */
+  .my-card-box1,
+  .my-card-box2 {
+    background-color: var(--layer-1);
+    border: var(--border);
+    border-radius: 25px;
+    overflow: hidden;
+  }
+
+  /* box 1 : nom en haut, photo en dessous */
+  .my-card-box1 {
+    flex: none;
+  }
+
+  .card-name {
+    font-size: 18px;
+    padding: 10px 16px 8px;
   }
 
   .my-card-photo {
     flex: none;
-    width: 100%;
-    height: 240px;
+    height: 220px;
     min-height: unset;
-    border-radius: 15px;
+    border-radius: 0;
   }
 
-  /* on montre le visage, pas le sommet du crâne */
-  .my-card-photo img {
-    object-position: center 15%;
+  /* box 2 : rôle + école + contacts */
+  .my-card-box2 {
+    border-left: none;
+    flex: none;
+    padding: 12px;
   }
 
-  .my-card-right {
-    padding: 0;
-    min-height: 180px;
+  .card-role {
+    font-size: 18px;
+    padding: 0 0 4px 0;
   }
 
-  /* taille fixe pour les icones/texte contact sur mobile
-     les container queries cqh marchent pas bien en colonne */
+  /* taille fixe contact sur mobile — les cqh font n'importe quoi en colonne */
   .contact-link img {
     height: 28px;
   }
